@@ -182,9 +182,23 @@ void palSetPadMode(ioportid_t port, int pad, int mode);
 
 #define HAL_I2C_LLD_H 
 typedef struct abstract I2CDriver;
-typedef struct abstract I2CConfig;
 typedef uint32_t i2cflags_t;
 typedef uint16_t i2caddr_t;
+typedef enum {
+  OPMODE_I2C = 1,
+  OPMODE_SMBUS_DEVICE = 2,
+  OPMODE_SMBUS_HOST = 3,
+} i2copmode_t;
+typedef enum {
+  STD_DUTY_CYCLE = 1,
+  FAST_DUTY_CYCLE_2 = 2,
+  FAST_DUTY_CYCLE_16_9 = 3,
+} i2cdutycycle_t;
+typedef struct {
+  i2copmode_t     op_mode;
+  uint32_t        clock_speed;
+  i2cdutycycle_t  duty_cycle;
+} I2CConfig;
 #define HAL_I2C_H 
 #define I2C_NO_ERROR 0x00
 #define I2C_BUS_ERROR 0x01
